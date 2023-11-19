@@ -13,24 +13,26 @@ return new class extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->boolean('adult');
+            $table->unsignedBigInteger('movie_id');
+            $table->boolean('adult')->default(0);
             $table->string('title');
             $table->string('backdrop_path');
-            $table->string('status');
-            $table->string('tagline');
-            $table->integer('budget');
+            $table->string('status')->nullable();
+            $table->string('tagline')->nullable();
+            $table->integer('budget')->nullable();
             $table->string('original_language');
             $table->string('original_title');
-            $table->string('overview');
+            $table->text('overview');
             $table->string('poster_path');
-            $table->string('media_type');
-            $table->integer('popularity');
+            $table->float('popularity');
             $table->string('release_date');
-            $table->boolean('video');
-            $table->integer('vote_average');
+            $table->boolean('video')->default(0);
+            $table->float('vote_average');
             $table->integer('vote_count');
-            $table->integer('revenue');
-            $table->integer('runtime');
+            $table->integer('revenue')->nullable();
+            $table->integer('runtime')->nullable();
+            $table->boolean('trendingday')->default(0);
+            $table->boolean('trendingweek')->default(0);
             $table->timestamps();
         });
     }
