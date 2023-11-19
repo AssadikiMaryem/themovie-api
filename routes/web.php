@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+})->group(function () {
+    Route::get('/movies', [MovieController::class, 'index'])->name('movies');
+})->group(function () {
+    Route::get('/movies/{id}', [MovieController::class, 'show'])->name('movies.show');
 });
