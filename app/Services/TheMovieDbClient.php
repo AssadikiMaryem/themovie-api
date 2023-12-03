@@ -18,7 +18,8 @@ class TheMovieDbClient
             throw new \Exception('Time window is not valid, available options are day and week');
         }
 
-        $response = Http::withToken(env('THE_MOVIE_DB_API_KEY'))
+        //Make Request
+        $response = Http::withToken(config('services.the_movie_db.api_key'))
             ->get(self::THE_MOVIE_DB_API_URL . 'trending/movie/' . $timeWindow);
 
         $responseData = $response->json();
@@ -34,9 +35,11 @@ class TheMovieDbClient
     /**
      * @throws \Exception
      */
+
+    //Make request to get movie details
     public function getMovieDetails(int $id): array
     {
-        $response = Http::withToken(env('THE_MOVIE_DB_API_KEY'))
+        $response = Http::withToken(config('services.the_movie_db.api_key'))
             ->get(self::THE_MOVIE_DB_API_URL . 'movie/' . $id);
 
         $responseData = $response->json();

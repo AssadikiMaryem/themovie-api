@@ -35,11 +35,11 @@ class TrendingMovie extends Component
     {
         return view('livewire.trending-movie', [
             'movies' => Movie::search('title', $this->search)
-            ->when($this->trending == 'day', function ($query, $trending) {
-                return $query->where('trendingday', 'LIKE', $trending);
+            ->when($this->trending == 'day', function ($query) {
+                return $query->ofTrendingTime($this->trending);
             })
-            ->when($this->trending == 'week', function ($query, $trending) {
-                return $query->where('trendingweek', 'LIKE', $trending);
+            ->when($this->trending == 'week', function ($query) {
+                return $query->ofTrendingTime($this->trending);
             })
             ->paginate(12),
         ]);
